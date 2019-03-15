@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.bottomize{
+  position: absolute;
+  bottom: 0px;
+}
+.error-message{
+  margin-top: -20px;
+  color : red;
+  text-align: left;
+}
+.pad-top-0{
+  padding-top: 0px!important;
+}
+.uploadAvatar{
+  max-width: 300px;
+}
+td.action a{
+  margin: 0px 8px;
+}
+.mgbtm-10{
+  margin-bottom: 10px;
+}
+.mgtop-0{
+  margin-top: 0px!important;
+}
+body{
+  background-color: #edf1f5!important;
+}
+.card-body {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,83 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Ajouter Admin | Modérateur</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item active">Ajouter Admin | Modérateur</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form #form="ngForm">
+              <div class="form-group">
+                <label for="last_name">Nom</label>
+                <input id="last_name" type="text" name="last_name" ngModel required class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="first_name">Prénom(s)</label>
+                <input id="first_name" type="text" name="first_name" ngModel required class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" ngModel email required class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="user_group">Rôles</label>
+                <nz-select nzMode="multiple" [(ngModel)]="selectedRole" name="user_group" required id="user_group">
+                  <nz-option *ngFor="let option of userGroups" [nzLabel]="option.description" [nzValue]="option.name"></nz-option>
+                </nz-select>
+              </div>
+              <div class="form-group ">
+                <label>Photo de profil</label>
+                <nz-upload class="avatar-uploader"
+                           nzName="profile"
+                           nzListType="picture-card"
+                           [nzShowUploadList]="false"
+                           [nzBeforeUpload]="beforeProfilUpload">
+                  <ng-container *ngIf="!profilePhotoUrl">
+                    <i nz-icon type="plus"></i>
+                    <div class="ant-upload-text">Téléversez</div>
+                  </ng-container>
+                  <img *ngIf="profilePhotoUrl" [src]="profilePhotoUrl" class="avatar uploadAvatar">
+                </nz-upload>
+                <span class="help-block text-muted">
+                                            <small>Formats JPG|PNG supportés. Taille maximale 1Mo</small>
+                                        </span>
+              </div>
+              <div class="form-group">
+                <button  class="mySubmit" [disabled]="!form.valid"
+                         (click)="submit(form)" [nzLoading]="submittingIsLoading"
+                         nz-button nzType="primary" type="button">Soumettre <i nz-icon type="check"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>

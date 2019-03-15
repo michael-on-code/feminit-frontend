@@ -1,0 +1,116 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Modifier mon compte | Modifier mot de passe</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item active">Modifier</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form #form="ngForm">
+              <div class="form-group">
+                <label for="last_name">Nom</label>
+                <input id="last_name" type="text" name="last_name" ngModel [(ngModel)]="userData.last_name" required
+                       class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="first_name">Prénom(s)</label>
+                <input id="first_name" type="text" name="first_name" ngModel [(ngModel)]="userData.first_name" required
+                       class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input [disabled]="true" id="email" type="email" [(value)]="userData.email" email required
+                       class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="phone">Téléphone</label>
+                <input id="phone" type="tel" name="phone" ngModel [(ngModel)]="userData.phone" required
+                       class="form-control">
+              </div>
+              <div class="form-group ">
+                <label>Photo de profil</label>
+                <nz-upload class="avatar-uploader"
+                           nzName="profile"
+                           nzListType="picture-card"
+                           [nzShowUploadList]="false"
+                           [nzBeforeUpload]="beforeProfilUpload">
+                  <ng-container *ngIf="!user_photo">
+                    <i nz-icon type="plus"></i>
+                    <div class="ant-upload-text">Téléversez</div>
+                  </ng-container>
+                  <img *ngIf="user_photo" [src]="user_photo" class="avatar uploadAvatar">
+                </nz-upload>
+                <span class="help-block text-muted">
+                                            <small>Formats JPG|PNG supportés. Taille maximale 1Mo</small>
+                                        </span>
+              </div>
+              <div class="form-group">
+                <button class="mySubmit" [disabled]="!form.valid"
+                        (click)="submitUserData(form)" [nzLoading]="submittingIsLoading"
+                        nz-button nzType="primary" type="button">Soumettre <i nz-icon type="check"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <form #passform="ngForm">
+              <div class="form-group">
+                <label for="password">Mot de passe actuel</label>
+                <input id="password" type="password" minlength="8" name="password" ngModel required
+                       class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="newpassword">Nouveau mot de passe</label>
+                <input #newPass="ngModel" id="newpassword" type="password" minlength="8" name="newpassword" ngModel required
+                       class="form-control">
+                <span class="help-block text-muted">
+                                            <small>8 caractères au minimum <br></small>
+                                        </span>
+              </div>
+              <div class="form-group">
+                <label for="confirmpassword">Confirmation du mot de passe</label>
+                <input #confPass="ngModel" (keyup)="passwordControl(newPass, confPass)" id="confirmpassword" type="password" minlength="8" name="confirmpassword" ngModel required
+                       class="form-control">
+                <p class="error-message mgtop-0" *ngIf="confPass.incorrect" >Confirmation pas identique avec le mot de passe</p>
+              </div>
+
+              <div class="form-group">
+                <button class="mySubmit" [disabled]="!(passform.valid && newPass.valid && confPass.valid && (!confPass.incorrect))"
+                        (click)="submitUserPassword(passform, confPass)" [nzLoading]="passwordSubmittingIsLoading"
+                        nz-button nzType="primary" type="button">Soumettre <i nz-icon type="check"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>

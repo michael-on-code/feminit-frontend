@@ -1,0 +1,87 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Liste des plaintes/témoignages</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item active">Plaintes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <nz-skeleton [nzLoading]="skeletonLoading" [nzActive]="true" [nzAvatar]="true">
+                <div  nz-row [nzGutter]="24">
+                  <div nz-col nzSm="12" nzXs="24" nzLg="8" *ngFor="let data of complainList">
+                    <div class="mycard-margin hvr-hang">
+                      <nz-card [nzCover]="coverTemplate"
+                               [nzActions]="[actionSetting,actionEdit]">
+                        <nz-card-meta [nzTitle]="cardTitle" [nzDescription]="cardDescription"
+                                      [nzAvatar]="avatarTemplate"></nz-card-meta>
+                      </nz-card>
+                      <ng-template #avatarTemplate>
+                        <a routerLink="/dashboard/useredit/{{data.author_id}}"><nz-avatar nzSrc="{{getUserPhoto(data.user_photo)}}"></nz-avatar></a>
+                      </ng-template>
+                      <ng-template #cardTitle>
+                        <a routerLink="/dashboard/useredit/{{data.author_id}}">{{data.first_name}} {{data.last_name}}</a>
+                      </ng-template>
+                      <ng-template #cardDescription>
+                        <div class="row m-g-0" >
+                          <span *ngIf="data.source" class="font-11" ><i class="icon-globe"></i> {{data.source | titlecase}} </span>
+                          <span class="font-11"><i class="icon-clock"> {{getDateLaps(data.created_at)}}</i></span>
+                          <span class="font-11"><i class="icon-cloud-upload"> {{data.totalUploads}}</i></span>
+                        </div>
+                        <div class="description-outer">
+                          <p class="description-inner ">{{getDescription(data.text) | slice:0:80}} [...]</p>
+                        </div>
+
+                      </ng-template>
+
+                      <ng-template #coverTemplate>
+                        <div class="cover-outer">
+                          <a class="cover-inner" routerLink="/dashboard/complaints/view/{{data.id}}" class="text-center">
+                            <img class="img-responsive complain-cover" alt="cover" src="{{getCover(data.cover)}}"/></a>
+                        </div>
+
+                      </ng-template>
+                      <ng-template #actionSetting>
+                        <a title="Visualiser" routerLink="/dashboard/complaints/view/{{data.id}}"><i nz-icon type="eye"></i></a>
+                      </ng-template>
+                      <ng-template #actionEdit>
+                        <a title="Modifier" routerLink="/dashboard/complaints/edit/{{data.id}}"><i  nz-icon type="edit"></i></a>
+                      </ng-template>
+                    </div>
+
+                  </div>
+                </div>
+            </nz-skeleton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>
+
+

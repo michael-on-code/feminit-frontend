@@ -1,0 +1,65 @@
+<section id="wrapper" class="step-register">
+  <div class="register-box">
+    <div class="">
+      <a href="javascript:void(0)" class="text-center m-b-40"><img width="120px" src="assets/images/feminit.png" alt="Feminit" /></a>
+      <!-- multistep form -->
+      <form nz-form  id="msform" #signup="ngForm">
+        <!-- progressbar -->
+        <ul id="eliteregister">
+          <li class="active">Création de compte</li>
+          <li>Informations personnelles</li>
+        </ul>
+        <!-- fieldsets -->
+        <fieldset>
+          <h2 class="fs-title">Créer votre compte</h2>
+          <h3 class="fs-subtitle">Etape 1</h3>
+          <div class="form-group">
+            <input #email="ngModel" (blur)="controlMail(email)" ngModel required name="email" email type="email" placeholder="Email" />
+            <p class="error-message" *ngIf="email.incorrect  && email.dirty">{{email.errorMessage}}</p>
+          </div>
+          <div class="form-group">
+            <input #username="ngModel" (blur)="controlUsername(username)"  required type="text" name="username" ngModel placeholder="Nom d'utilisateur" />
+            <p class="error-message" *ngIf="username.incorrect" >{{username.errorMessage}}</p>
+          </div>
+          <div class="form-group">
+            <input #pass="ngModel"  required type="password" ngModel name="password" placeholder="Mot de passe" />
+          </div>
+          <div class="form-group">
+            <input #cpass="ngModel" (keyup)="passwordControl(pass, cpass)"  required type="password" ngModel name="cpass" placeholder="Confirmation de mot de passe" />
+            <p class="error-message" *ngIf="cpass.incorrect" >Confirmation pas identique avec le mot de passe</p>
+          </div>
+          <nz-button-group >
+            <button [disabled]="!(email.valid && username.valid && pass.valid && cpass.valid && (!email.incorrect) && (!username.incorrect) && (!cpass.incorrect) ) " type="button" nz-button nzType="primary" class="my-next">Suivant<i nz-icon type="right"></i></button>
+          </nz-button-group>
+          <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+              Vous avez déjà un compte ? <a routerLink="/login" class="text-primary m-l-5"><b>Se connecter</b></a>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <h2 class="fs-title">Informations personnelles</h2>
+          <h3 class="fs-subtitle">Etape 2</h3>
+          <input #fname="ngModel" required type="text" name="first_name" ngModel placeholder="Nom" />
+          <input #lname="ngModel" required type="text" name="last_name" ngModel placeholder="Prénom(s)" />
+          <input #phone="ngModel" type="text" name="phone" ngModel placeholder="Téléphone" />
+          <textarea #adress="ngModel" name="address" ngModel placeholder="Adresse"></textarea>
+          <button type="button" nz-button nzType="primary" class="my-previous mg-right-10"><i nz-icon type="left"></i> Précédent</button>
+          <button [disabled]="!(fname.valid && lname.valid)" class="mySubmit"
+                  (click)="submit(signup)" [nzLoading]="isLoading"
+                  nz-button nzType="primary" type="button">Soumettre <i nz-icon type="check"></i></button>
+          <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+              Vous avez déjà un compte ? <a routerLink="/login" class="text-primary m-l-5"><b>Se connecter</b></a>
+            </div>
+          </div>
+        </fieldset>
+
+      </form>
+
+      <div class="clear"></div>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</section>

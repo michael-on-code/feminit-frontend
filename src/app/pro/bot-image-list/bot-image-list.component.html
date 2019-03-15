@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Images du ChatBot</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item"><a href="#">ChatBot</a></li>
+            <li class="breadcrumb-item active">Images</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <nz-skeleton [nzLoading]="skeletonLoading" [nzActive]="true" [nzAvatar]="true">
+              <a class="pull-right mgbtm-10" title="Ajouter une image"
+                 routerLink="/dashboard/chatbot/images/add" nz-button nzType="primary"><i nz-icon
+                                                                                          type="plus"></i>
+                Image</a>
+              <table datatable class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr>
+                  <th>Mot clé</th>
+                  <th>Image</th>
+                  <th>Actions</th>
+                  <!--<th>Date d'inscription</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr #tr *ngFor="let data of botImageList">
+                  <td><a routerLink="/dashboard/chatbot/images/edit/{{data.id}}">{{data.key}}</a></td>
+                  <td><img src="{{uploadUrl+data.value}}" width="50" alt=""></td>
+                  <!--<td>{{data.created_on}}</td>-->
+                  <td class="action">
+                    <a routerLink="/dashboard/chatbot/images/edit/{{data.id}}" title="Modifier" nz-button
+                       nzType="primary"
+                       nzShape="circle"><i nz-icon type="edit"></i></a>
+                    <a nz-popconfirm nzTitle="Voulez-vous vraiment supprimer cette image ?"
+                       (nzOnConfirm)="deleteImage(tr, data.id)" title="Supprimer" nz-button nzType="danger"
+                       nzShape="circle"><i nz-icon type="delete"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </nz-skeleton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>
+
+

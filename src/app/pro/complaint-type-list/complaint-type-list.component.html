@@ -1,0 +1,72 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Liste des types de plaintes</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item"><a href="#">Catégories</a></li>
+            <li class="breadcrumb-item active">Types de plaintes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <nz-skeleton [nzLoading]="skeletonLoading" [nzActive]="true" [nzAvatar]="true">
+              <a class="pull-right mgbtm-10" title="Ajouter un type de plaintes"
+                 routerLink="/dashboard/complaints/category/types/add" nz-button nzType="primary"><i nz-icon
+                                                                                                     type="plus"></i>
+                Type de plaintes</a>
+              <nz-table #complainTypeListTable [nzData]="complaintTypeList">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                  <!--<th>Date d'inscription</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let data of complainTypeListTable.data">
+                  <td><img width="30" src="{{uploadUrl + data.photo}}" alt=""></td>
+                  <td><a routerLink="/dashboard/complaints/category/types/edit/{{data.id}}">{{data.name}}</a></td>
+                  <td>{{data.description}}</td>
+                  <!--<td>{{data.created_on}}</td>-->
+                  <td class="action">
+                    <a routerLink="/dashboard/complaints/category/types/edit/{{data.id}}" title="Modifier" nz-button nzType="primary"
+                       nzShape="circle"><i nz-icon type="edit"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </nz-table>
+            </nz-skeleton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+  <!-- ============================================================== -->
+</div>
+
+

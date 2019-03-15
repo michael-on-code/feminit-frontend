@@ -1,0 +1,40 @@
+<section id="wrapper" class="login-register login-sidebar" [style.background-image]="siteBackground">
+  <div class="login-box card">
+    <div class="card-body">
+      <form class="form-horizontal form-material text-center" #confirmForm="ngForm"  >
+        <a  href="javascript:void(0)" class="db"><img width="120px" src="{{siteLogo}}" alt="Feminit" /></a>
+        <h3 class="fs-title">Finaliser mon inscription</h3>
+        <div class="form-group m-t-40">
+          <div class="col-xs-12">
+            <input #username="ngModel" class="form-control" required type="text" (blur)="controlUsername(username)" name="username" ngModel placeholder="Nom d'utilisateur" />
+            <p class="error-message mgtop-0" *ngIf="username.incorrect" >{{username.errorMessage}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input #pass="ngModel" class="form-control" required type="password" name="password" ngModel placeholder="Mot de passe" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input #cpass="ngModel" class="form-control" (keyup)="passwordControl(pass, cpass)" required type="password" name="cpass" ngModel placeholder="Confirmation de Mot de passe" />
+            <p class="error-message mgtop-0" *ngIf="cpass.incorrect" >Confirmation pas identique avec le mot de passe</p>
+          </div>
+        </div>
+
+        <div class="form-group text-center m-t-20">
+          <div class="col-xs-12">
+            <button [disabled]="!(username.valid && pass.valid && cpass.valid && (!username.incorrect) && (!cpass.incorrect))" class="mySubmit"
+                    (click)="submit(confirmForm, username, cpass)" [nzLoading]="isLoading"
+                    nz-button nzType="primary" type="button">Soumettre <i nz-icon type="check"></i></button>
+          </div>
+        </div>
+      </form>
+
+      <div class="bottomize">
+        <hr>
+        <p class="text-center">&copy; <a href="#">Femin'IT</a> - Plateforme de lutte contre les violences faites aux femmes. <br>Propulsée par <a href="https://www.solidarit-hub.org">SolidarIT</a></p>
+      </div>
+    </div>
+  </div>
+</section>

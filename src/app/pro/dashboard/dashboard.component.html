@@ -1,0 +1,140 @@
+<div id="main-wrapper">
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  <header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+      <!-- ============================================================== -->
+      <!-- Logo -->
+      <!-- ============================================================== -->
+      <div class="navbar-header text-center">
+        <a class="navbar-brand" href="#">
+          <!-- Logo icon --><b>
+          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+          <!-- Dark Logo icon -->
+          <img src="{{siteOptions.siteLogo}}" width="60px" alt="homepage" class="dark-logo"/>
+          <!-- Light Logo icon -->
+        </b>
+          <!--End Logo icon -->
+          <!-- Logo text --></a>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Logo -->
+      <!-- ============================================================== -->
+      <div class="navbar-collapse">
+        <!-- ============================================================== -->
+        <!-- toggle and nav items -->
+        <!-- ============================================================== -->
+        <ul class="navbar-nav mr-auto">
+          <!-- This is  -->
+          <li class="nav-item"><a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark"
+                                  href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+          <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark"
+                                  href="javascript:void(0)"><i class="icon-menu"></i></a></li>
+          <!-- ============================================================== -->
+          <!-- Search -->
+          <!-- ============================================================== -->
+          <!--<li class="nav-item">
+            <form class="app-search d-none d-md-block d-lg-block">
+              <input type="text" class="form-control" placeholder="Search & enter">
+            </form>
+          </li>-->
+        </ul>
+        <!-- ============================================================== -->
+        <!-- User profile and search -->
+        <!-- ============================================================== -->
+
+      </div>
+    </nav>
+  </header>
+  <!-- ============================================================== -->
+  <!-- End Topbar header -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+      <!-- User Profile-->
+      <div class="user-profile">
+        <div class="user-pro-body">
+          <div><img src="{{getUserPhoto()}}" alt="user-img" class="img-circle"></div>
+          <div class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown"
+               role="button" aria-haspopup="true" aria-expanded="false">{{userData.first_name}}
+              {{userData.last_name}}<span class="caret"></span></a>
+            <div class="dropdown-menu animated flipInY">
+              <!-- text-->
+              <a routerLink="/dashboard/myaccount" class="dropdown-item"><i class="ti-user"></i> Mon compte</a>
+              <!-- text-->
+              <div class="dropdown-divider"></div>
+              <!-- text-->
+              <a routerLink="/dashboard/parameters" class="dropdown-item"><i class="ti-settings"></i> Paramètres
+                généraux</a>
+              <!-- text-->
+              <div class="dropdown-divider"></div>
+              <!-- text-->
+              <a (click)="logout()" class="dropdown-item"><i class="fa fa-power-off"></i> Se déconnecter</a>
+              <!-- text-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+          <li><a class="waves-effect waves-dark" routerLinkActive="active" routerLink="/dashboard/stats"
+                 aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Tableau de bord</span></a></li>
+          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+            class="ti-face-sad"></i><span class="hide-menu">Plaintes</span></a>
+            <ul aria-expanded="false" class="collapse">
+              <li><a routerLink="/dashboard/complaints" routerLinkActive="active">Liste</a></li>
+              <li><a routerLink="/dashboard/complaints/category/types" routerLinkActive="active">Catégories de plaintes</a></li>
+              <li><a routerLink="/dashboard/complaints/category/violences" routerLinkActive="active">Catégories de violences</a></li>
+            </ul>
+          </li>
+          <li><a class="waves-effect waves-dark" routerLinkActive="active" routerLink="/dashboard/subscribers"
+                 aria-expanded="false"><i class="icon-user-following"></i><span class="hide-menu">Abonnés</span></a>
+          </li>
+          <li><a class="waves-effect waves-dark" routerLinkActive="active" routerLink="/dashboard/admins"
+                 aria-expanded="false"><i class="icon-user-following"></i><span
+            class="hide-menu">Admins & Modérateurs</span></a></li>
+          <li><a class="waves-effect waves-dark" routerLinkActive="active" routerLink="/dashboard/parameters"
+                 aria-expanded="false"><i class="icon-settings"></i><span
+            class="hide-menu">Paramètres généraux</span></a></li>
+          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+            class="ti-facebook"></i><span class="hide-menu">ChatBot</span></a>
+            <ul aria-expanded="false" class="collapse">
+              <li><a routerLink="/dashboard/chatbot/messages" routerLinkActive="active">Messages</a></li>
+              <li><a routerLink="/dashboard/chatbot/images" routerLinkActive="active">Images</a></li>
+            </ul>
+          </li>
+          <li><a class="waves-effect waves-dark" routerLinkActive="active" routerLink="/dashboard/myaccount"
+                 aria-expanded="false"><i class="icon-user"></i><span class="hide-menu">Mon compte</span></a></li>
+        </ul>
+      </nav>
+      <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+  </aside>
+  <!-- ============================================================== -->
+  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <router-outlet></router-outlet>
+  <!-- ============================================================== -->
+  <!-- End Page wrapper  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <footer class="footer">
+    {{siteOptions.siteDescription}}
+  </footer>
+  <!-- ============================================================== -->
+  <!-- End footer -->
+  <!-- ============================================================== -->
+</div>

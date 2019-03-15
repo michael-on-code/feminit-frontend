@@ -1,0 +1,147 @@
+<div class="page-wrapper">
+  <!-- ============================================================== -->
+  <!-- Container fluid  -->
+  <!-- ============================================================== -->
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Vue globale</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+            <li class="breadcrumb-item"><a routerLink="/dashboard/complaints">Plaintes/Témoignages</a></li>
+            <li class="breadcrumb-item active">Vue Globale</li>
+          </ol>
+          <a class="btn btn-info d-none d-lg-block m-l-15" title="Modifier"
+             routerLink="/dashboard/complaints/edit/{{complainID}}" nz-button nzType="primary"><i nz-icon
+                                                                                        type="edit"></i>Mettre à jour</a>
+        </div>
+      </div>
+    </div>
+    <nz-skeleton [nzLoading]="skeletonLoading" [nzActive]="true">
+      <div class="row">
+
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <div class="m-t-30 text-center"><img src="{{getUserPhoto(complainData.user_photo)}}" class="img-circle"
+                                                   width="150"/>
+                <h4 class="card-title m-t-10">{{complainData.first_name}} {{complainData.last_name}}</h4>
+                <h6 class="card-subtitle"><a routerLink="/dashboard/edituser/{{complainData.author_id}}">Modifier
+                  Profil</a></h6>
+                <div class="row text-center justify-content-md-center">
+                  <div class="col-9" title="Date"><i class="icon-clock"></i> <font
+                    class="font-medium"> {{complainData.created_at}}</font></div>
+                  <div class="col-2" title="Fichiers uploadés"><i class="icon-cloud-upload"></i> <font
+                    class="font-medium"> {{getArrayLength(complainData.uploads)}}</font></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!--<hr>-->
+            </div>
+            <!--<div class="card-body">
+              <small class="text-muted">Email address</small>
+              <h6>hannagover@gmail.com</h6>
+              <small class="text-muted p-t-30 db">Phone</small>
+              <h6>+91 654 784 547</h6>
+              <small class="text-muted p-t-30 db">Address</small>
+              <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
+              <div class="map-box">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
+                  width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
+              <small class="text-muted p-t-30 db">Social Profile</small>
+              <br/>
+              <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
+              <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
+              <button class="btn btn-circle btn-secondary"><i class="fab fa-youtube"></i></button>
+            </div>-->
+          </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+          <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#uploads" role="tab">Fichiers</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#others" role="tab">Autres informations</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active" id="description" role="tabpanel">
+                <div class="card-body">
+                  <div class="profiletimeline">
+                    <div class="sl-item" *ngFor="let updates of complainData.updates">
+                      <div class="sl-left"> <img src="{{getUserPhoto(updates.user_photo)}}" alt="user" class="img-circle" /> </div>
+                      <div class="sl-right">
+                        <div><a href="#" class="link">{{updates.first_name}} {{updates.last_name}}</a> <!--<span class="sl-date">5 minutes ago</span>-->
+                          <p *ngIf="updates.description" class="m-t-10 font16" [innerHTML]="updates.description" ></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sl-item">
+                      <div class="sl-left"> <img src="{{getUserPhoto(complainData.user_photo)}}" alt="user" class="img-circle" /> </div>
+                      <div class="sl-right">
+                        <div><a href="#" class="link">{{complainData.first_name}} {{complainData.last_name}}</a> <!--<span class="sl-date">5 minutes ago</span>-->
+                          <p class="m-t-10 font16" *ngIf="complainData.text" [innerHTML]="complainData.text"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <!--<div class="sl-item">
+                      <div class="sl-left"> <img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> </div>
+                      <div class="sl-right">
+                        <div><a href="javascript:void(0)" class="link">John Doe</a> <span class="sl-date">5 minutes ago</span>
+                          <blockquote class="m-t-10">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                          </blockquote>
+                        </div>
+                      </div>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+              <!--second tab-->
+              <div class="tab-pane" id="uploads" role="tabpanel">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="card-columns el-element-overlay">
+                      <div class="card" *ngFor="let upload of complainData.uploads">
+                        <div class="el-card-item">
+                          <div class="el-card-avatar el-overlay-1">
+                            <a target="_blank" class="image-popup-vertical-fit" href="{{fileShower(upload.link, true)}}"> <img src="{{fileShower(upload.link)}}" alt="user"> </a>
+                          </div>
+                          <div class="el-card-content">
+                            <h6 class="box-title">Par {{upload.first_name}} {{upload.last_name}}</h6>
+                            <small>{{upload.description}}</small>
+                            <br> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="others" role="tabpanel">
+                <div class="card-body">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Column -->
+      </div>
+    </nz-skeleton>
+  </div>
+</div>
