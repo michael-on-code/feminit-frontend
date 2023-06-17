@@ -12,8 +12,8 @@ import {HttpHeaders} from '@angular/common/http';
 
 export const environment = {
   production: false,
-  apiUrl: 'https://ifisun.solidarit-hub.org/index.php',
-  uploadUrl : 'https://ifisun.solidarit-hub.org/uploads/',
+  apiUrl: 'https://ausecours.animashaunmichael.com/index.php',
+  uploadUrl : 'https://ausecours.animashaunmichael.com/uploads/',
   httpHeader : {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
